@@ -94,10 +94,18 @@ padding: 20px;
   .rating .filled {
     color: #000;
   }
+#rateStar > div {
+  text-align:left !important;
+}
 @media (max-width: 767px) {
     #rateStar, #controlIcons {
     text-align: center; 
-    width:100%;   }
+    width:100%;  
+  }
+  
+  #rateStar > div {
+  text-align:center !important;
+}
 }
 
 
