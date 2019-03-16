@@ -14,8 +14,14 @@ function controller() {
        
 
 return _this.value;
+
+
+
     }
 }
+
+
+
 
 /* 
 starApp.controller('StarCtrl', ['$scope', function ($scope) {
@@ -153,7 +159,7 @@ app.controller('ExampleController', ['$scope', function($scope) {
 app.controller('peopleCtrl', function ($scope, $http) {
     $http.get("people.json").then(function (response) {
         $scope.myData = response.data.People;
-        $scope.myFilter = "Test";
+        //$scope.myFilter = "Test";
         //  $scope.autoID =  $index;
         $scope.boom = function (val) {
             console.log(val);
@@ -168,15 +174,27 @@ app.controller('peopleCtrl', function ($scope, $http) {
         $scope.myVMdata = vmdata;
 
        
-        for (var i = 0; i < vmdata.length; i++) {
+     /*    for (var i = 0; i < vmdata.length; i++) {
            var data = vmdata;
          //  console.log(index); // 0, 1, 2, 3
             console.log(data); // A, B, C, D
+          } */
+
+          $scope.getID= function(id){
+            // $scope.theFilter = {};
+            console.log(id);
+           // console.log($scope.theFilter);
+            $scope.theFilter =  $scope.myVMdata;
+           // console.log($scope.theFilter.id);
+           
+          
           }
 
+         
+       
               
        
-      
+         
 
 
     });

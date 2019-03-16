@@ -7,7 +7,7 @@
   <meta name="keywords" content="HTML,CSS,JavaScript,AngularJS 1.6">
   <meta name="author" content="John Raymund Niconi">
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
   <title>John Raymund Niconi</title>
   <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -44,18 +44,21 @@
           <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control" placeholder="Search..." />
         </div>
         <div class="form-group p-2 mb-0">
-          <label>Select Contact</label>
+        <!--   <label>Select Contact</label>
           <select id="searchText" ng-model="searchText" class="form-control form-control-lg">
 
             <option ng-repeat="v in myVMdata" ng-selected="v == myVMdata.value">{{ v.name }}</option>
           </select>
-
-
+ -->
+ <div  ng-repeat="v in myVMdata track by $index">
+  <button ng-click="getID($index)" >{{ v.name }}</button>
+ </div>
+ 
 
         </div>
 
       </div>
-      <div class="col-md-8 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata | filter:searchText | limitTo : 1">
+      <div class="col-md-8 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata | filter:theFilter | limitTo : 1">
 
         <div class="row">
           <div class="col-md-5 themed-grid-col text-center border-0">
@@ -177,7 +180,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 
