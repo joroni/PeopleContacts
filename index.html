@@ -44,21 +44,58 @@
           <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control" placeholder="Search..." />
         </div>
         <div class="form-group p-2 mb-0">
-        <!--   <label>Select Contact</label>
+          <label>Select Contact</label>
           <select id="searchText" ng-model="searchText" class="form-control form-control-lg">
 
             <option ng-repeat="v in myVMdata" ng-selected="v == myVMdata.value">{{ v.name }}</option>
           </select>
- -->
- <div  ng-repeat="v in myVMdata track by $index">
-  <button ng-click="getID($index)" >{{ v.name }}</button>
- </div>
- 
 
+<!--  <div  ng-repeat="v in myVMdata track by $index">
+  <button ng-click="getID($index)" >{{ v.name }}</button>
+ </div> -->
+ 
         </div>
 
       </div>
-      <div class="col-md-8 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata | filter:theFilter | limitTo : 1">
+
+        <!-- The Modal -->
+  <div class="modal fade" id="modalContactForm"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form ng-controller="peopleCtrl">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-1">
+            <i class="fas fa-user prefix grey-text"></i>
+            
+      
+            <input type="text" id="form34" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="form34">Recipient</label>
+          </div>
+
+       
+          <div class="md-form">
+            <i class="fas fa-pencil prefix grey-text"></i>
+            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+            <label data-error="wrong" data-success="right" for="form8">Message</label>
+          </div>
+
+        </div>
+        <div class="modal-footer bg-g d-flex justify-content-center">
+          <button class="btn btn-unique close" ng-click="messagingStat()"  data-dismiss="modal">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+      <div class="col-md-8 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata | filter:searchText | limitTo : 1">
 
         <div class="row">
           <div class="col-md-5 themed-grid-col text-center border-0">
@@ -129,49 +166,6 @@
     </div>
   </div>
 
-
-  <!-- The Modal -->
-  <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body mx-3">
-          <div class="md-form mb-1">
-            <i class="fas fa-user prefix grey-text"></i>
-            <input type="text" id="form34" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="form34">Your name</label>
-          </div>
-
-          <div class="md-form mb-1">
-            <i class="fas fa-envelope prefix grey-text"></i>
-            <input type="email" id="form29" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="form29">Your email</label>
-          </div>
-
-          <div class="md-form mb-1">
-            <i class="fas fa-tag prefix grey-text"></i>
-            <input type="text" id="form32" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="form32">Subject</label>
-          </div>
-
-          <div class="md-form">
-            <i class="fas fa-pencil prefix grey-text"></i>
-            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-            <label data-error="wrong" data-success="right" for="form8">Your message</label>
-          </div>
-
-        </div>
-        <div class="modal-footer bg-g d-flex justify-content-center">
-          <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   <!-- /container -->
