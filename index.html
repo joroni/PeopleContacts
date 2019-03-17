@@ -1,17 +1,19 @@
 <!doctype html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Assessment">
   <meta name="keywords" content="HTML,CSS,JavaScript,AngularJS 1.6">
   <meta name="author" content="John Raymund Niconi">
-  <link rel="shortcut icon" href="favicon.ico" />
+
   <link rel="stylesheet" href="style.css" />
   <title>John Raymund Niconi</title>
   <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -21,6 +23,7 @@
       -ms-user-select: none;
       user-select: none;
     }
+    
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -29,63 +32,84 @@
   </style>
   <!-- Custom styles for this template -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
   <link href="grid.css" rel="stylesheet">
 </head>
+
 <body id="myApp" class="py-4" ng-app="myApp">
+
+ 
+
   <div class="container" ng-controller="peopleCtrl">
+      
+      <nav class="row navbar navbar-expand-md navbar-dark bg-black">
+          <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+              <div class="navbar-nav mr-auto">
+                  <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control" placeholder="Search..." />
+              </div>
+          </div>
+          <div class="mx-auto order-0">
+              <a class="navbar-brand mx-auto" href="#">People</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+              <ul class="navbar-nav ml-auto">
+                 
+                      <li class="nav-item dropdown user-link" ng-repeat="item in userVMdata | limitTo : 1">
+                        
+                          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{item.name}} <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Logout</a></li>
+                            <li><a href="#">Settings</a></li>
+                          </ul>
+                        </li>
+                 
+                 
+              </ul>
+          </div>
+      </nav>
+    
     <div class="row">
-      <div class="col-md-4 themed-grid-col p-0 bg-g">
-        <div class="form-group p-2 mb-0">
+      <div class="col-md-3 themed-grid-col p-0 bg-g">
+        <!-- <div class="form-group p-2 mb-0">
           <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control" placeholder="Search..." />
-        </div>
-        <div class="form-group p-2 mb-0">
+        </div> -->
+          <div  ng-repeat="v in myVMdata track by $index">
+  <li class="btn btn-block link-item list-group-item" ng-click="getID(v.name)" ng-selected="v == myVMdata.value" ng-model="theFilter" >{{ v.name }}</li>
+ </div> 
+ 
+
+
+        <!--<div class="form-group p-2 mb-0">
           <label>Select Contact</label>
           <select id="searchText" ng-model="searchText" class="form-control form-control-lg">
+
             <option ng-repeat="v in myVMdata" ng-selected="v == myVMdata.value">{{ v.name }}</option>
           </select>
-<!--  <div  ng-repeat="v in myVMdata track by $index">
-  <button ng-click="getID($index)" >{{ v.name }}</button>
- </div> -->
-        </div>
+
+        
+
+        </div>-->
+
       </div>
-        <!-- The Modal -->
-  <div class="modal fade" id="modalContactForm"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form ng-controller="peopleCtrl">
-        <div class="modal-body mx-3">
-          <div class="md-form mb-1">
-            <i class="fas fa-user prefix grey-text"></i>
-            <input type="text" id="form34" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="form34">Recipient</label>
-          </div>
-          <div class="md-form">
-            <i class="fas fa-pencil prefix grey-text"></i>
-            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-            <label data-error="wrong" data-success="right" for="form8">Message</label>
-          </div>
-        </div>
-        <div class="modal-footer bg-g d-flex justify-content-center">
-          <button class="btn btn-unique close" ng-click="messagingStat()"  data-dismiss="modal">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-      <div class="col-md-8 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata | filter:searchText | limitTo : 1">
+
+
+      <div class="col-md-9 themed-grid-col pt-2 pr-4 pl-4 border-0" ng-repeat="item in myVMdata  | filter:searchText | filter:theFilter | limitTo : 1">
+
+
+
+
+
         <div class="row">
           <div class="col-md-5 themed-grid-col text-center border-0">
-            <img class="user-photo" src="{{item.img}}" />
+            <img class="user-photo" src={{item.img}} />
             <div class="user-name col-sm-12"><strong>{{item.name}}</strong></div>
           </div>
           <div class="col-md-7 themed-grid-col border-0">
             <div class="row">
+
               <div id="rateStar" class="well col-md-12 col-sm-6 mb-4 mt-4" ng-controller="ctrl">
                 <div star rating-value="item.rating" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
                 <div>
@@ -98,12 +122,54 @@
                 </div>
               </div>
               <div id="controlIcons" class="well col-md-12 col-sm-6 mb-4 mt-4">
-                <a class="btn-black" data-toggle="modal" data-target="#modalContactForm" href="#" data-placement="top" title="Message"><i
+                <a ng-click="getName(item.$index)" class="btn-black" data-toggle="modal" data-target="#modalContactForm" href="#" data-placement="top" title="Message"><i
                                         class="fas fa-comments fa-2x"></i></a>
               </div>
             </div>
           </div>
         </div>
+           <!-- The Modal -->
+     
+ <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form >
+              <div class="modal-body mx-3">
+                <div class="md-form mb-1" ng-repeat="item in userVMdata | limitTo : 1">
+                  <i class="fas fa-user prefix grey-text"></i>
+                <label data-error="wrong" data-success="right" for="myfield2">From:</label>
+                 <input type="text" id="myfield2" name="myfield2"   readonly  ng-bind="name" value="{{item.name}}" class="form-control validate">
+                
+                </div>
+
+                <div class="md-form mb-1">
+                    <i class="fas fa-user prefix grey-text"></i>
+                  <label data-error="wrong" data-success="right" for="myfield">To:</label>
+                   <input type="text" id="myfield" name="myfield"   readonly  ng-bind="name" value="{{item.name}}" class="form-control validate">
+                  
+                  </div>
+      
+                <div class="md-form">
+                  <i class="fas fa-pencil prefix grey-text"></i>
+                    <label data-error="wrong" data-success="right" for="form8">Message</label>
+                  <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                
+                </div>
+
+              </div>
+              <div class="modal-footer bg-black d-flex justify-content-center p-0">
+                <button class="btn btn-messagesend btn-dark btn-block close pt-2 pb-2" ng-click="messagingStat()" data-dismiss="modal">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
         <div class="row">
           <div class="pb-3 pt-3">
             <p>{{item.Description}}</p>
@@ -112,14 +178,20 @@
         <div class="row">
           <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
             <div class="p-75 text-left fs-2"><strong>Likes</strong></div>
+
             <table class="table table-striped">
               <tbody>
                 <tr ng-repeat="items in item.Likes">
                   <td>{{ items }}</td>
                   <td ng-if="$index <= items.Likes.length-1">{{items.Likes[$index]}}</td>
+
+
                 </tr>
               </tbody>
+
             </table>
+
+
           </div>
           <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
             <div class="p-75 text-left fs-2"><strong>Dislikes</strong></div>
@@ -128,21 +200,31 @@
                 <tr ng-repeat="items in item.Dislikes">
                   <td>{{ items }}</td>
                   <td ng-if="$index <= items.Dislikes.length-1">{{items.Dislikes[$index]}}</td>
+
+
                 </tr>
               </tbody>
+
             </table>
           </div>
         </div>
       </div>
+</div>
     </div>
-  </div>
+ 
+
+
+   
   <!-- /container -->
   <script data-require="angularjs@1.6.4" data-semver="1.6.4" src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
   <script src="script.js"></script>
+
 </body>
+
 </html>
 <!-- 
 Copyright 2019 Google Inc. All Rights Reserved.

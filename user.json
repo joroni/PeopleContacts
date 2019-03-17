@@ -1,0 +1,24 @@
+{
+  "User": [
+    {
+      "id": 1,
+      "name": "Sample User 1",
+      "username": "User 1",
+      "password": "",
+      "img": "http://www.fillmurray.com/200/200", 
+      "Description": "Before errors, mails were only pressures. This is not to discredit the idea that a magic is the prose of anelizabeth. This could be, or perhaps some posit the outmost coil to be less than dedal. Some assert that those treatments are nothing more than carp.",
+      "Likes": [
+        "Frank",
+        "Manchester United",
+        "Football",
+        "Programming"
+      ],
+      "Dislikes": [
+        "Dogs",
+        "Long walks on the beach",
+        "Chopin",
+        "Tacos"
+      ]
+    }
+  ]
+}
