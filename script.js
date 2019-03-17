@@ -9,21 +9,10 @@ function controller() {
     _this.change = function () {
         //  _this.sayHello = 'Hello';
         _this.sayHello = _this.value;
-       
         console.log('this', _this.values);
-       
-
 return _this.value;
-
-
-
     }
 }
-
-
-
-
-
 app.controller('ctrl',function($scope){
   $scope.max = 5;
   $scope.ratingVal = 5;
@@ -37,7 +26,6 @@ app.controller('ctrl',function($scope){
   $scope.onChange = function(val){
     $scope.ratingVal = val;
   }
-
 });
 app.directive('star', function () {
   return {
@@ -80,7 +68,6 @@ app.directive('star', function () {
         }
       };
       updateStars();
- 
       scope.$watch('ratingValue', function (oldVal, newVal) {
         if (newVal) {
           updateStars();
@@ -106,68 +93,42 @@ app.controller('ngchangeCtrl', function ($scope) {
         "userid": 3,
         "name": "Praveen"
     }];
-
     var un =  $scope.arrlist;
     $scope.getdetails = function () {
         if ($scope.userselected.userid == $scope.userselected.userid )
             $scope.result = true;
-
         else
             $scope.result = false;
     }
 }); */
-
-
 app.controller('ExampleController', ['$scope', function($scope) {
     $scope.name = 'Whirled';
   }]);
-
 app.controller('peopleCtrl', function ($scope, $http) {
     $http.get("people.json").then(function (response) {
         $scope.myData = response.data.People;
-        //$scope.myFilter = "Test";
-        //  $scope.autoID =  $index;
         $scope.boom = function (val) {
             console.log(val);
         };
-
         console.log('myData', $scope.myData);
         localStorage.setItem('people', JSON.stringify($scope.myData));
-
-
         var vmdata = JSON.parse(localStorage.getItem('people'));
         console.log('vmdata', vmdata);
         $scope.myVMdata = vmdata;
-
-
-
         $scope.messagingStat =function(){
           alert('Message Sent.');
         }
-       
      /*    for (var i = 0; i < vmdata.length; i++) {
            var data = vmdata;
          //  console.log(index); // 0, 1, 2, 3
             console.log(data); // A, B, C, D
           } */
-
           $scope.getID= function(id){
             // $scope.theFilter = {};
             console.log(id);
            // console.log($scope.theFilter);
             $scope.theFilter =  $scope.myVMdata;
            // console.log($scope.theFilter.id);
-           
-          
           }
-
-         
-       
-              
-       
-         
-
-
     });
-
 });
