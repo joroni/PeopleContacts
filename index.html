@@ -75,10 +75,24 @@
       <div class="col-md-3 themed-grid-col p-0 bg-g">
         <!-- <div class="form-group p-2 mb-0">
           <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control" placeholder="Search..." />
-        </div> -->
-          <div  ng-repeat="v in myVMdata track by $index">
+        </div>
+       
+            <div class="bar">
+              <input type="text" class="search" ng-model="searchText" placeholder="Enter your search terms" />
+            </div>
+            <ul class="data-ctrl">
+              <li ng-repeat="i in myVMdata | searchFor:searchText">
+                <p>{{i.title}}</p>
+              </li>
+            </ul> -->
+          
+          <div  ng-repeat="v in myVMdata | filter:searchText">
   <li class="btn btn-block link-item list-group-item" ng-click="getID(v.name)" ng-selected="v == myVMdata.value" ng-model="theFilter" >{{ v.name }}</li>
  </div> 
+<!-- 
+ <div  ng-repeat="v in myVMdata track by $index">
+    <li class="btn btn-block link-item list-group-item" ng-click="getID(v.name)" ng-selected="v == myVMdata.value" ng-model="theFilter" >{{ v.name }}</li>
+   </div>  -->
  
 
 

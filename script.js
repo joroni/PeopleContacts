@@ -130,6 +130,8 @@ app.controller('Test',  function($scope) {
     };
 });
 
+
+
 /* 
 app.controller('peopleCtrl2',  function($scope) {
 
@@ -153,6 +155,23 @@ app.controller('peopleCtrl', function($scope, $http) {
       console.log(val);
     };
   })
+
+
+ 
+$scope.MyCtrl = function($scope) {
+  
+    $scope.people = [
+        {id: 1, name: "Mark"},
+        {id: 2, name: "John"},
+        {id:3, name: "Joe"}
+    ];
+    $scope.myFilter = function(item){
+        if(item.id === 2){
+            return item;
+        }
+    };
+}
+  
   $http.get("people.json").then(function(response) {
     $scope.myData = response.data.People;
     /* $scope.boom = function(val) {
