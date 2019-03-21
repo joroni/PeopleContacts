@@ -1,206 +1,223 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Assessment">
   <meta name="keywords" content="HTML,CSS,JavaScript,AngularJS 1.6">
   <meta name="author" content="John Raymund Niconi">
 
-  <link rel="stylesheet" href="style.css" />
   <title>John Raymund Niconi</title>
+
   <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" />
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
-  <!-- Custom styles for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-  <link href="grid.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+
+
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="custom.css">
+
+
 </head>
 
 <body id="myApp" class="py-4" ng-app="myApp">
+  <div ng-controller="peopleCtrl">
+    <div class="navbar bg-black navbar-fixed-top navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
 
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">People</a>
 
-
-  <div class="container" ng-controller="peopleCtrl">
-
-    <nav class="row navbar navbar-expand-md navbar-dark bg-black">
-      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <div class="navbar-nav mr-auto">
-          <input type="text" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control"
-            placeholder="Search..." />
         </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav  navbar-right">
+           
+            <li class="nav-item dropdown user-link" ng-repeat="item in userVMdata | limitTo : 1">
+      
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="true">{{item.name}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Logout</a></li>
+                  <li><a href="#">Settings</a></li>
+                </ul>
+              </li>
+          
+          </ul>
+        </div>
+        <!-- /.nav-collapse -->
       </div>
-      <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">People</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
+      <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
 
-          <li class="nav-item dropdown user-link" ng-repeat="item in userVMdata | limitTo : 1">
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="sidebar-nav">
+            <div class="p-3">
+              <input type="text" id="searchBar" ng-model="searchText" ng-bind="name" value="{{ctrl.value}}" class="form-control"
+              placeholder="Search..." />
+            </div>
+            <ul class="nav" ng-repeat="v in myVMdata | filter:searchText">
 
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="true">{{item.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Logout</a></li>
-              <li><a href="#">Settings</a></li>
+              <li class="list-group-item" ng-click="getID(v.name)" ng-selected="v == myVMdata.value"
+                ng-model="theFilter">{{ v.name }}</li>
+
             </ul>
-          </li>
-
-
-        </ul>
-      </div>
-    </nav>
-
-    <div class="row">
-      <div class="col-md-3 themed-grid-col p-0 bg-g">
-    
-
-        <div ng-repeat="v in myVMdata | filter:searchText">
-          <li class="btn btn-block link-item list-group-item" ng-click="getID(v.name)" ng-selected="v == myVMdata.value"
-            ng-model="theFilter">{{ v.name }}</li>
-        </div>
-    
-      </div>
-
-
-      <div class="col-md-9 themed-grid-col pt-2 pr-4 pl-4 border-0"
-        ng-repeat="item in myVMdata  | filter:searchText | filter:theFilter | limitTo : 1">
-
-
-        <div class="row">
-          <div class="col-md-5 themed-grid-col text-center border-0">
-            <img class="user-photo" src={{item.img}} />
-            <div class="user-name col-sm-12"><strong>{{item.name}}</strong></div>
           </div>
-          <div class="col-md-7 themed-grid-col border-0">
-            <div class="row">
+          <!--/.well -->
+        </div>
+        <!--/span-->
 
-              <div id="rateStar" class="well col-md-12 col-sm-6 mb-4 mt-4" ng-controller="ctrl">
-                <div star rating-value="item.rating" max="max" on-hover="onHover" on-leave="onLeave"
-                  readonly="{{readonly}}"></div>
+        <div class="col-xs-12 col-sm-9"
+          ng-repeat="item in myVMdata  | filter:searchText | filter:theFilter | limitTo : 1">
+     
+          <div class="jumbotron">
+            <a href="#" class="visible-xs" data-toggle="offcanvas"><i class="fa fa-lg fa-reorder"></i></a>
+
+            <div class="rows">
+              <div class="col-md-5 themed-grid-col text-center border-0">
+                <img class="user-photo" src={{item.img}} />
+                <div class="user-name col-sm-12"><strong>{{item.name}}</strong></div>
+              </div>
+              <div class="col-md-7 themed-grid-col border-0">
+                <div class="rowContainer">
+
+                  <div id="rateStar" class="well col-md-12 col-sm-6 mb-4 mt-4" ng-controller="ctrl">
+                    <div star rating-value="item.rating" max="max" on-hover="onHover" on-leave="onLeave"
+                      readonly="{{readonly}}"></div>
+
+                  </div>
+                  <div id="controlIcons" class="well col-md-12 col-sm-6 mb-4 mt-4">
+                    <a ng-click="getName(item.name)" class="btn-black" data-toggle="modal"
+                      data-target="#modalContactForm" href="#" data-placement="top" title="Message"><i
+                        class="fa fa-comments fa-2x"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+
+
+                <div class="rowContainer">
+                  <div class="pb-3 pt-3">
+                    <p>{{item.Description}}</p>
+                  </div>
+                </div>
+                <div class="rowContainer">
+                  <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
+                    <div class="p-75 text-left fs-2"><strong>Likes</strong></div>
+
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr ng-repeat="items in item.Likes">
+                          <td>{{ items }}</td>
+                          <td ng-if="$index <= items.Likes.length-1">{{items.Likes[$index]}}</td>
+
+
+                        </tr>
+                      </tbody>
+
+                    </table>
+
+
+                  </div>
+                  <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
+                    <div class="p-75 text-left fs-2"><strong>Dislikes</strong></div>
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr ng-repeat="items in item.Dislikes">
+                          <td>{{ items }}</td>
+                          <td ng-if="$index <= items.Dislikes.length-1">{{items.Dislikes[$index]}}</td>
+
+
+                        </tr>
+                      </tbody>
+
+                    </table>
+                  </div>
+                </div>
              
-              </div>
-              <div id="controlIcons" class="well col-md-12 col-sm-6 mb-4 mt-4">
-                <a ng-click="getName(item.$index)" class="btn-black" data-toggle="modal" data-target="#modalContactForm"
-                  href="#" data-placement="top" title="Message"><i class="fas fa-comments fa-2x"></i></a>
-              </div>
-            </div>
+
+              <!-- The Modal -->
+
+       <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header text-center">
+             <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <form>
+             <div class="modal-body mx-3">
+               <div class="md-form mb-1" ng-repeat="item in userVMdata | limitTo : 1">
+                 <i class="fa fa-user prefix grey-text"></i>
+                 <label data-error="wrong" data-success="right" for="myfield2">From:</label>
+                 <input type="text" id="myfield2" name="myfield2" readonly ng-bind="name" value="{{item.name}}"
+                   class="form-control validate">
+
+               </div>
+
+               <div class="md-form mb-1">
+                 <i class="fa fa-user prefix grey-text"></i>
+                 <label data-error="wrong" data-success="right" for="myfield">To:</label>
+                 <input type="text" id="myfield" name="myfield" readonly ng-bind="name" value="{{item.name}}"
+                   class="form-control validate">
+
+               </div>
+
+               <div class="md-form">
+                 <i class="fa fa-pencil prefix grey-text"></i>
+                 <label data-error="wrong" data-success="right" for="form8">Message</label>
+                 <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+
+               </div>
+
+             </div>
+             <div class="modal-footer bg-black d-flex justify-content-center p-0">
+               <button class="btn btn-messagesend btn-dark btn-block close pt-2 pb-2" ng-click="messagingStat()"
+                 data-dismiss="modal">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+             </div>
+           </form>
+         </div>
+       </div>
+     </div>
+
+            <!--/span-->
           </div>
+
+          <!--/row-->
         </div>
-        <!-- The Modal -->
-
-        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header text-center">
-                <!-- <h4 class="modal-title w-100 font-weight-bold">Write to us</h4> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form>
-                <div class="modal-body mx-3">
-                  <div class="md-form mb-1" ng-repeat="item in userVMdata | limitTo : 1">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="myfield2">From:</label>
-                    <input type="text" id="myfield2" name="myfield2" readonly ng-bind="name" value="{{item.name}}"
-                      class="form-control validate">
-
-                  </div>
-
-                  <div class="md-form mb-1">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="myfield">To:</label>
-                    <input type="text" id="myfield" name="myfield" readonly ng-bind="name" value="{{item.name}}"
-                      class="form-control validate">
-
-                  </div>
-
-                  <div class="md-form">
-                    <i class="fas fa-pencil prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form8">Message</label>
-                    <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-
-                  </div>
-
-                </div>
-                <div class="modal-footer bg-black d-flex justify-content-center p-0">
-                  <button class="btn btn-messagesend btn-dark btn-block close pt-2 pb-2" ng-click="messagingStat()"
-                    data-dismiss="modal">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="pb-3 pt-3">
-            <p>{{item.Description}}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
-            <div class="p-75 text-left fs-2"><strong>Likes</strong></div>
-
-            <table class="table table-striped">
-              <tbody>
-                <tr ng-repeat="items in item.Likes">
-                  <td>{{ items }}</td>
-                  <td ng-if="$index <= items.Likes.length-1">{{items.Likes[$index]}}</td>
+        <!--/span-->
 
 
-                </tr>
-              </tbody>
-
-            </table>
-
-
-          </div>
-          <div class="col-md-6 themed-grid-col p-0 bg-w mb-4">
-            <div class="p-75 text-left fs-2"><strong>Dislikes</strong></div>
-            <table class="table table-striped">
-              <tbody>
-                <tr ng-repeat="items in item.Dislikes">
-                  <td>{{ items }}</td>
-                  <td ng-if="$index <= items.Dislikes.length-1">{{items.Dislikes[$index]}}</td>
-
-
-                </tr>
-              </tbody>
-
-            </table>
-          </div>
-        </div>
       </div>
+      <!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>JR NICONI</p>
+      </footer>
     </div>
   </div>
-
-
-
+  <!--/.container-->
 
   <!-- /container -->
   <script data-require="angularjs@1.6.4" data-semver="1.6.4"
@@ -208,6 +225,8 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
@@ -217,11 +236,11 @@
 
   <script src="script.js"></script>
 
+
+
+
+
+
 </body>
 
 </html>
-<!-- 
-Copyright 2019 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->
